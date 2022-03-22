@@ -1,4 +1,3 @@
-from weapon import  Weapon
 
 
 class Dinosaur:
@@ -27,6 +26,6 @@ class Dinosaur:
                     print(f'{self.name} attacked {attack_robot.name} with {self.weapon_choice [2]}')
                     break
         self.endurance -= 10
-        attack_robot.health -= self.weapon.attack_power
+        attack_robot.health -= self.weapon.power
         print(f'{self.name} endurance is now {self.endurance}')
         print(f'{attack_robot.name} health is now {attack_robot.health}')
