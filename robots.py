@@ -3,7 +3,7 @@ from weapon import Weapon
 
 
 class Robot:    
-    def __init__(self, name):
+    def __init__(self, name, Weapon):
         self.name = name
         self.health = 200
         self.endurance = 150
@@ -20,18 +20,18 @@ class Robot:
                 except ValueError:
                     continue
                 if attack_choice == 1:
-                    print(f'{self.name} attacked {dinosaur_to_destroy.type} with {self.weapon_choice[0]}')
+                    print(f'{self.name} attacked {dinosaur_to_destroy.name} with {self.weapon_choice[0]}')
                     break
                 elif attack_choice == 2:
-                    print(f'{self.name} attacked {dinosaur_to_destroy.type} with {self.weapon_choice[1]}')
+                    print(f'{self.name} attacked {dinosaur_to_destroy.name} with {self.weapon_choice[1]}')
                     break
                 elif attack_choice == 3:
-                    print(f'{self.name} attacked {dinosaur_to_destroy.type} with {self.weapon_choice[2]}')
+                    print(f'{self.name} attacked {dinosaur_to_destroy.name} with {self.weapon_choice[2]}')
                     break
         self.endurance -= 10
         dinosaur_to_destroy.health -= self.weapon.attack_power
         print(f'{self.name} endurance is now {self.endurance}')
-        print(f'{dinosaur_to_destroy.type} health is now {dinosaur_to_destroy.health}')
+        print(f'{dinosaur_to_destroy.name} health is now {dinosaur_to_destroy.health}')
 
 
 
