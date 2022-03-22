@@ -1,5 +1,4 @@
-import robots
-import dinosaur
+
 from herd import Herd
 from fleet import Fleet
 import random
@@ -11,9 +10,9 @@ class Battlefield:
         self.herd = Herd()
 
 
-    def run_game(self):  # master function to call all methods
+    def run_game(self):  
         self.display_welcome()
-        self.team = self.choose_team()
+
         self.battle()
 
 
@@ -21,25 +20,12 @@ class Battlefield:
         print('Welcome to the battle of the century!')
 
         print('Each Robot and Dinosaur begin with 100 health.')
-        print('Each character begins with 100 energy/power level points')
-        print('and attacking requires 10 energy/power level points.')
+        print('-------------------------------------------------')
 
         print('There are 3 robots in a fleet and 3 dinosaurs in herd.')
         print('A winner is declared once all Robots in a fleet or ')
         print('all Dinosaurs in a Herd have 0 health.')
-
-
-    def choose_team(self):
-        choose_team = int(input('Choose your team: (1) Dinosaurs; (2) Robots: '))
-        if choose_team == 1:
-            print('Time to Go feral! You have picked Dinosaurs')
-            return choose_team
-        elif choose_team == 2:
-            print('Time to charge up the batteries! You have picked Robots')
-            return choose_team
-        else:
-            print('Invalid answer. Try again.')
-            self.choose_team()
+        print('-------------------------------------------------')
 
 
     def battle(self):
@@ -59,7 +45,7 @@ class Battlefield:
                         self.robo_turn() 
 
                         if self.herd.dinosaurs[0].health <= 0:
-                            print(f'{self.herd.dinosaurs[0].type} is out.')
+                            print(f'{self.herd.dinosaurs[0].name} is out.')
                             self.herd.dinosaurs.remove(self.herd.dinosaurs[0])
                         elif self.fleet.robots[0].health <= 0:
                             print(f'{self.fleet.robots[0].name} is out.')
@@ -111,7 +97,7 @@ class Battlefield:
                         self.robo_turn()  
 
                         if self.herd.dinosaurs[0].health <= 0:
-                            print(f'{self.herd.dinosaurs[0].type} is out.')
+                            print(f'{self.herd.dinosaurs[0].name} is out.')
                             self.herd.dinosaurs.remove(self.herd.dinosaurs[0])
                         elif self.fleet.robots[0].health <= 0:
                             print(f'{self.fleet.robots[0].name} is out.')
@@ -148,7 +134,7 @@ class Battlefield:
     def show_robo_opponent_options(self):
         i = 1
         for element in self.herd.dinosaurs:
-            print(f'{element.type} has {element.health} health.')
+            print(f'{element.name} has {element.health} health.')
             i += 1
 
 
