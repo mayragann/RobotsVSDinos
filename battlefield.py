@@ -1,40 +1,163 @@
-from dinosaur import Dinosaur
-from robots import Robot
-from fleet import Fleet
+import robots
+import dinosaur
 from herd import Herd
+from fleet import Fleet
 import random
 
+
 class Battlefield:
-    def __init__(self) -> None:
+    def __init__(self):
         self.fleet = Fleet()
         self.herd = Herd()
-        
-    def run_game(self):
+
+
+    def run_game(self):  # master function to call all methods
         self.display_welcome()
         self.team = self.choose_team()
         self.battle()
 
 
     def display_welcome(self):
-        print("Welcome to the brawl of the century!")
-        print("Are you ready to rummmmbleeeeee?")
-        print("-------------------------------------")
-        print("Dinosaurs versus Robots!")
-        print("Both Dinosaurs and Robots start with 200 health")
-        print("Each contestant begins with 150 stamina")
-        print("Attacks will drain each contestant of 10")
-        print("There is a fleet of robots and a herd of dinosaurs")
-        print("A winner is declared once all Robots in fleet")
-        print("or all Dinosaurs in a herd have 0 health")
+        print('Welcome to the battle of the century!')
+
+        print('Each Robot and Dinosaur begin with 100 health.')
+        print('Each character begins with 100 energy/power level points')
+        print('and attacking requires 10 energy/power level points.')
+
+        print('There are 3 robots in a fleet and 3 dinosaurs in herd.')
+        print('A winner is declared once all Robots in a fleet or ')
+        print('all Dinosaurs in a Herd have 0 health.')
+
+
+    def choose_team(self):
+        choose_team = int(input('Choose your team: (1) Dinosaurs; (2) Robots: '))
+        if choose_team == 1:
+            print('Time to Go feral! You have picked Dinosaurs')
+            return choose_team
+        elif choose_team == 2:
+            print('Time to charge up the batteries! You have picked Robots')
+            return choose_team
+        else:
+            print('Invalid answer. Try again.')
+            self.choose_team()
+
+
     def battle(self):
-        pass
-    def dino_turn(self, dinosaur):
-        pass
-    def robo_turn(self, robot):
-        pass
+        first_turn = random.randint(1, 2)
+        if first_turn == 1:
+            print('Robots are up first')
+            first_turn = 1
+        if first_turn == 2:
+            print('Dinosaurs are up first')
+            first_turn = 2
+
+
+        if first_turn == 1:
+            while len(self.fleet.robots) > 0 and len(self.herd.dinosaurs) > 0:
+                    if self.fleet.robots[0].health > 0 or self.herd.dinosaurs[0].health > 0:
+
+                        self.robo_turn() 
+
+                        if self.herd.dinosaurs[0].health <= 0:
+                            print(f'{self.herd.dinosaurs[0].type} is out.')
+                            self.herd.dinosaurs.remove(self.herd.dinosaurs[0])
+                        elif self.fleet.robots[0].health <= 0:
+                            print(f'{self.fleet.robots[0].name} is out.')
+                            self.fleet.robots.remove(self.fleet.robots[0])
+
+                        if len(self.fleet.robots) == 0:
+                            self.display_winners_dinosaurs()
+                            return
+                        elif len(self.herd.dinosaurs) == 0:
+                            self.display_winners_robots()
+                            return
+
+                        self.dino_turn()  
+
+                        if self.herd.dinosaurs[0].health <= 0:
+                            print(f'{self.herd.dinosaurs[0].type} is out.')
+                            self.herd.dinosaurs.remove(self.herd.dinosaurs[0])
+                        elif self.fleet.robots[0].health <= 0:
+                            print(f'{self.fleet.robots[0].name} is out.')
+                            self.fleet.robots.remove(self.fleet.robots[0])
+
+                        if len(self.fleet.robots) == 0:
+                            self.display_winners_dinosaurs()
+                            return
+                        elif len(self.herd.dinosaurs) == 0:
+                            self.display_winners_robots()
+                            return
+
+
+        elif first_turn == 2:
+            while len(self.fleet.robots) > 0 and len(self.herd.dinosaurs) > 0:
+                    if self.fleet.robots[0].health > 0 or self.herd.dinosaurs[0].health > 0:
+
+                        self.dino_turn()  
+                        if self.herd.dinosaurs[0].health <= 0:
+                            print(f'{self.herd.dinosaurs[0].type} is out.')
+                            self.herd.dinosaurs.remove(self.herd.dinosaurs[0])
+                        elif self.fleet.robots[0].health <= 0:
+                            print(f'{self.fleet.robots[0].name} is out.')
+                            self.fleet.robots.remove(self.fleet.robots[0])
+
+                        if len(self.fleet.robots) == 0:
+                            self.display_winners_dinosaurs()
+                            return
+                        elif len(self.herd.dinosaurs) == 0:
+                            self.display_winners_robots()
+                            return
+
+                        self.robo_turn()  
+
+                        if self.herd.dinosaurs[0].health <= 0:
+                            print(f'{self.herd.dinosaurs[0].type} is out.')
+                            self.herd.dinosaurs.remove(self.herd.dinosaurs[0])
+                        elif self.fleet.robots[0].health <= 0:
+                            print(f'{self.fleet.robots[0].name} is out.')
+                            self.fleet.robots.remove(self.fleet.robots[0])
+
+                        if len(self.fleet.robots) == 0:
+                            self.display_winners_dinosaurs()
+                            return
+                        elif len(self.herd.dinosaurs) == 0:
+                            self.display_winners_robots()
+                            return
+
+
+    def dino_turn(self):
+        self.show_dino_opponent_options()
+        self.herd.dinosaurs[0].attack_robot(self.fleet.robots[0])
+
+        
+
+
+    def robo_turn(self):
+        self.show_robo_opponent_options()
+        self.fleet.robots[0].attack_dinosaur(self.herd.dinosaurs[0])
+
+
+
     def show_dino_opponent_options(self):
-        pass
+        i = 1
+        for element in self.fleet.robots:
+            print(f'{element.name} has {element.health} health.')
+            i += 1
+
+
     def show_robo_opponent_options(self):
-        pass
-    def display_winner(sefl):
-        pass
+        i = 1
+        for element in self.herd.dinosaurs:
+            print(f'{element.type} has {element.health} health.')
+            i += 1
+
+
+    def display_winners_robots(self):
+        print('Zzzztttt, The Robots have exterminated the Dinosaurs')
+
+
+    def display_winners_dinosaurs(self):
+        print('Rwaaaar, the Dinosaurs are the apex predators and obliterated the Robots')
+
+
+  
