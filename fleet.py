@@ -6,9 +6,9 @@ class Fleet:
         self.create_fleet()
     
     def create_fleet(self):
-        weapon1 = Weapon("Flaming Sword", 20)
+        weapon1 = Weapon("Flaming Sword", 50)
         weapon2 = Weapon("Frozen Potato Gun", 50)
-        weapon3 = Weapon("Gravity Gun", 100)
+        weapon3 = Weapon("Gravity Gun", 50)
 
         robot1 = Robot("Megabuzz", weapon1)
         robot2 = Robot("Lightyear", weapon2)

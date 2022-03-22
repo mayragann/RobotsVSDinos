@@ -1,3 +1,5 @@
+from dinosaur import Dinosaur
+from robots import Robot
 from fleet import Fleet
 from herd import Herd
 
@@ -7,7 +9,8 @@ class Battlefield:
         self.herd = Herd()
         
     def run_game(self):
-        pass
+        self.display_welcome()
+        )
     def display_welcome(self):
         pass
     def battle(self):
